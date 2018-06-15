@@ -20,20 +20,20 @@ def get_db():
 
 
 def is_logged():
-	return session.get
+	return session.get('logged_in') == True
 
 
 def is_admin():
 	return session.get('is_logged_admin') == True
 
 
-def re_init_nav(is_logged_in, is_logged_admin):
+def re_init_nav(is_logged_in = False, is_logged_admin = False):
 	global nav
 	nav = """
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">HealthyLifestyle</a>
+			<a class="navbar-brand" href="/">HealthyLifestyle</a>
 		</div>
 		<ul class="nav navbar-nav">
 			<li class=""><a href="/">Начало</a></li>
@@ -45,11 +45,11 @@ def re_init_nav(is_logged_in, is_logged_admin):
 	nav += """
 			<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Здраве <span class="caret"></span></a>
 				<ul class="dropdown-menu">
-					<li><a href="sports">Спорт</a></li>
-					<li><a href="food">Здравословно хранене</a></li>
+					<li><a href="/sports">Спорт</a></li>
+					<li><a href="/food">Здравословно хранене</a></li>
 				</ul>
 			</li>
-			<li><a href="us">За нас</a></li>
+			<li><a href="/us">За нас</a></li>
 		</ul>
 	"""
 
@@ -59,12 +59,12 @@ def re_init_nav(is_logged_in, is_logged_admin):
 
 	if is_logged_in:
 		nav += """
-			 <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+			 <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
 		"""
 	else:
 		nav += """
-			<li><a href="signUp"><span class="glyphicon glyphicon-user"></span> Sign Up </a></li>
-			<li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
+			<li><a href="/signUp"><span class="glyphicon glyphicon-user"></span> Sign Up </a></li>
+			<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
 		"""
 
 	nav += """
@@ -274,6 +274,9 @@ def article(article_id):
 					""", (article_id,)).fetchone()
 	cursor.connection.close()
 
+	if article is None:
+		return redirect("/", code=404)
+
 	return """
 <html>
 	<head>
@@ -311,8 +314,7 @@ def article(article_id):
 			<h3>""" + article["title"] + """</h3>
 			<p>""" + article["body"] + """</p>
 			<div>
-				<span>Създадена от """ + article["username"] + """ </span>
-				<span>Създадена на """ + article["date"] + """ </span>
+				<span>Създадена от <b>""" + article["username"] + """</b> на <b>""" + article["date"] + """</b></span>
 			</div>
 		</div>
 	</body>
@@ -378,7 +380,7 @@ def home():
 							result += '<div class="panel-heading">';
 							result += '<h3 class="panel-title">' + element.title + '</h3>';
 							result += '</div>';
-							result += '<div class="panel-body">' + element.body.substr(0, 500) + '...';
+							result += '<div class="panel-body"><div>' + element.body.substr(0, 500) + '...</div>';
 							result += '<div><a class="btn btn-info" href="/article/' + element.id + '">Прочети повече</a></div>';
 							result += '</div></div>';
 						});
@@ -652,7 +654,7 @@ def login():
 @app.route("/logout", methods=['GET'])
 def logout():
 	session["logged_in"] = False
-	re_init_nav(False)
+	re_init_nav(False, False)
 	return redirect("/", 200)
 
 
