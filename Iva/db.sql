@@ -9,7 +9,8 @@ CREATE TABLE user (
   f_name varchar(50) NOT NULL,
   l_name varchar(50) NOT NULL,
   username varchar(50) UNIQUE NOT NULL,
-  password Varchar(64) NOT NULL
+  password Varchar(64) NOT NULL,
+  is_admin INTEGER DEFAULT 0
 );
 
 CREATE TABLE post (
