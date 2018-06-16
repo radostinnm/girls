@@ -706,7 +706,6 @@ def sports():
 	<body>
 		""" + nav + """
 		<div class="container">	
-			<a class="btn btn-info" href="/article/3">Какъв е пътят към по-здравословен начин на живот</a>
 			<a class="btn btn-info" href="/article/4"> Лесни упражнения за красиво тяло в домашни условия</a>
 			<a class="btn btn-info" href="/article/6">Здравословни ползи от спорта</a>
 			<a class="btn btn-info" href="/article/7">Животът изисква движение</a>
@@ -741,6 +740,8 @@ def food():
 		""" + nav + """
 
 		<div class="container">
+		<a class="btn btn-info" href="/article/3">Какъв е пътят към по-здравословен начин на живот</a>
+		<a class="btn btn-info" href="/arcticle/1">Здравословен начин на живот с промяна на хранителните навици
 		<a class="btn btn-info" href="/article/5">Здравословно хранене и рецепти</a>
 		<a class="btn btn-info" href="/article/8">Най-здравословните начини за готвене на зеленчуци</a>
 		<a class="btn btn-info" href="/article/10">7 стъпки за здравословен начин на живот</a>
