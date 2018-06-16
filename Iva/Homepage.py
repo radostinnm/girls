@@ -685,6 +685,7 @@ def us():
 			застоялия начин на живот, който е ежедневие за повечето хора.
 		</div>
 		<picture>
+		<div class="text-center">
 <img src=http://healtharticlesmagazine.com/wp-content/uploads/2018/01/Top-healthy-lifestyle-tips-for-having-a-better-quality-of-life.jpg>
 </picture>
 </div>
@@ -698,7 +699,7 @@ def sports():
 	return """
 <html>
 	<head>
-		<title>За нас</title>
+		<title>Спорт</title>
 		""" + head + """
 		
 	</head>
@@ -706,6 +707,12 @@ def sports():
 		""" + nav + """
 		<div class="container">	
 			<a class="btn btn-info" href="/article/3">Какъв е пътят към по-здравословен начин на живот</a>
+			<a class="btn btn-info" href="/article/4"> Лесни упражнения за красиво тяло в домашни условия</a>
+			<a class="btn btn-info" href="/article/6">Здравословни ползи от спорта</a>
+			<a class="btn btn-info" href="/article/7">Животът изисква движение</a>
+			<a class="btn btn-info" href="/article/9">Фитнес – Здравословен начин на живот</a>
+			<a class="btn btn-info" href="/article/10">7 стъпки за здравословен начин на живот</a>
+			
 		</div>
 	</body>
 </html>
@@ -724,6 +731,9 @@ def food():
 		""" + nav + """
 
 		<div class="container">
+		<a class="btn btn-info" href="/article/5">Здравословно хранене и рецепти</a>
+		<a class="btn btn-info" href="/article/8">Най-здравословните начини за готвене на зеленчуци</a>
+		<a class="btn btn-info" href="/article/10">7 стъпки за здравословен начин на живот</a>
 		</div>
 	</body>
 </html>
