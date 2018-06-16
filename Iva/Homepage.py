@@ -683,6 +683,10 @@ def us():
 			нездравословното хранене със здравословно, да успеем да ги мотивираме да спортуват повече и да оставят 
 			застоялия начин на живот, който е ежедневие за повечето хора.
 		</div>
+		<picture>
+<img src=http://healtharticlesmagazine.com/wp-content/uploads/2018/01/Top-healthy-lifestyle-tips-for-having-a-better-quality-of-life.jpg>
+</picture>
+</div>
 	</body>
 </html>
 """
@@ -705,7 +709,22 @@ def sports():
 </html>
 """
 
+@app.route("/food")
+def food():
+	return """
+<html>
+	<head>
+		<title>Здравословно хранене</title>
+		""" + head + """
+	</head>
+	<body>
+		""" + nav + """
 
+		<div class="container">
+		</div>
+	</body>
+</html>
+"""
 if __name__ == "__main__":
 	app.secret_key = 'V$H96A4K^8KsJxpB6LWZ?^kxRssMNyj#q?SfLxeB-wGRr?$WnfJv542zy!HG&kg6'
 	# app.debug = True
