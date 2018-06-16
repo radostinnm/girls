@@ -6,10 +6,10 @@ DROP TABLE IF EXISTS post;
 
 CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  f_name varchar(50) NOT NULL,
-  l_name varchar(50) NOT NULL,
-  username varchar(50) UNIQUE NOT NULL,
-  password Varchar(64) NOT NULL,
+  f_name VARCHAR(50) NOT NULL,
+  l_name VARCHAR(50) NOT NULL,
+  username VARCHAR(50) UNIQUE NOT NULL,
+  password VARCHAR(128) NOT NULL,
   is_admin INTEGER DEFAULT 0
 );
 

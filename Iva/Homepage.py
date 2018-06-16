@@ -27,7 +27,7 @@ def is_admin():
 	return session.get('is_logged_admin') == True
 
 
-def re_init_nav(is_logged_in = False, is_logged_admin = False):
+def re_init_nav(is_logged_in=False, is_logged_admin=False):
 	global nav
 	nav = """
 <nav class="navbar navbar-inverse">
@@ -85,14 +85,14 @@ nav = ""
 re_init_nav(False, False)
 
 
-# def debug():
-# 	data = request.data or request.form
-# 	print('*' * 40)
-# 	print('request')
-# 	print(data)
-# 	print('session')
-# 	print(session)
-# 	print('*' * 40)
+def debug():
+	data = request.data or request.form
+	print('*' * 40)
+	print('request')
+	print(data)
+	print('session')
+	print(session)
+	print('*' * 40)
 #
 #
 # @app.route("/debug", methods=['GET'])
@@ -415,30 +415,30 @@ def home():
 @app.route("/checkSignUp", methods=['POST'])
 def check_sign_up():
 	if is_logged():
-		return "logged"
+		return "Already logged in"
 
 	username = request.form['username']
 	if username is None:
-		return "empty_username"
+		return "empty username"
 
 	password = request.form['password']
 	if password is None:
-		return "empty_password"
+		return "empty password"
 
 	re_password = request.form['re-password']
 	if re_password is None:
-		return "empty_re-password"
+		return "empty re-password"
 
 	fname = request.form['fname']
 	if fname is None:
-		return "empty_fname"
+		return "empty fname"
 
 	lname = request.form['lname']
 	if lname is None:
-		return "empty_lname"
+		return "empty lname"
 
 	if password != re_password:
-		return "password"
+		return "password doesn't match"
 	db = get_db()
 	cursor = db.cursor()
 	check_username = cursor.execute("SELECT COUNT(*) FROM user WHERE username = ?", (username,)).fetchone()
@@ -446,7 +446,7 @@ def check_sign_up():
 		return "username"
 	cursor.execute(
 		'INSERT INTO user (f_name, l_name, username, password) VALUES(?, ?, ?, ?)',
-		(fname, lname, username, hashlib.sha512(password.encode('utf-8')).hexdigest(),)
+		(fname, lname, username, hashlib.sha256(password.encode('utf-8')).hexdigest(),)
 	)
 	db.commit()
 	session["id"] = cursor.lastrowid
@@ -458,11 +458,12 @@ def check_sign_up():
 	re_init_nav(True, False)
 	cursor.connection.close()
 
-	return render_template('auth/register.html')
+	return "OK"
 
 
 @app.route("/signUp", methods=['GET'])
 def sign_up():
+	debug()
 	if is_logged():
 		return redirect("/", code=410)
 	return """
@@ -484,7 +485,7 @@ def sign_up():
 								window.location.href = "/";
 							} else {
 								console.log(data);
-								alert("Error");
+								alert(data);
 							}
 						}
 					});
@@ -560,7 +561,7 @@ def check_login():
 	db = get_db()
 	user = db.execute(
 		'SELECT * FROM user WHERE username = ? AND	password = ?',
-		(username, hashlib.sha512(password.encode('utf-8')).hexdigest(),)
+		(username, hashlib.sha256(password.encode('utf-8')).hexdigest(),)
 	).fetchone()
 
 	db.close()
@@ -699,15 +700,17 @@ def sports():
 	<head>
 		<title>За нас</title>
 		""" + head + """
+		
 	</head>
 	<body>
 		""" + nav + """
-
-		<div class="container">
+		<div class="container">	
+			<a class="btn btn-info" href="/article/3">Какъв е пътят към по-здравословен начин на живот</a>
 		</div>
 	</body>
 </html>
 """
+
 
 @app.route("/food")
 def food():
@@ -725,6 +728,8 @@ def food():
 	</body>
 </html>
 """
+
+
 if __name__ == "__main__":
 	app.secret_key = 'V$H96A4K^8KsJxpB6LWZ?^kxRssMNyj#q?SfLxeB-wGRr?$WnfJv542zy!HG&kg6'
 	# app.debug = True
