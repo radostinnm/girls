@@ -715,6 +715,16 @@ def sports():
 			
 		</div>
 	</body>
+<head>
+<style>
+body {
+    background-image: url("http://moziru.com/images/sport-clipart-wallpaper-4.jpg");
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: 700px 600px;
+}
+</style>
+</head>
 </html>
 """
 
@@ -736,6 +746,16 @@ def food():
 		<a class="btn btn-info" href="/article/10">7 стъпки за здравословен начин на живот</a>
 		</div>
 	</body>
+ <head>
+            <style>
+            body {
+                background-image: url("https://us.123rf.com/450wm/romastudio/romastudio1603/romastudio160300267/54088790-simbolo-de-corazon-verduras-concepto-de-dieta-la-fotograf%C3%ADa-de-alimentos-del-coraz%C3%B3n-a-partir-de-diversos.jpg?ver=6");
+                background-repeat: no-repeat;
+                background-position: bottom center;
+                background-size: auto;
+            }
+			</style>
+ </head>
 </html>
 """
 
